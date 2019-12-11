@@ -56,15 +56,25 @@ def plot_Q_S_rewards():
     c1 = '#023474'
     c2 = '#ef0107'
 
-    ax.plot(Q_rewards[0], c=c1, mec='none', ms=3, label='Q$_{ravg}$-SSPR $\\alpha_0=0.01$')
-    ax.plot(Q_rewards[1], c=c2, mec='none', ms=3, label='Q$_{ravg}$-SSPR $\\alpha_0=0.05$')
-    ax.plot(Q_rewards[2],  mec='none', ms=3, label='Q$_{ravg}$-SSPR $\\alpha_0=0.15$')
-    ax.plot(Q_rewards[3],  mec='none', ms=3, label='Q$_{ravg}$-SSPR $\\alpha_0=0.25$')
+    # ax.plot(Q_rewards[0], c=c1, mec='none', ms=3, label='Q$_{ravg}$-SSPR $\\alpha_0=0.01$')
+    # ax.plot(Q_rewards[1], c=c2, mec='none', ms=3, label='Q$_{ravg}$-SSPR $\\alpha_0=0.05$')
+    # ax.plot(Q_rewards[2],  mec='none', ms=3, label='Q$_{ravg}$-SSPR $\\alpha_0=0.15$')
+    # ax.plot(Q_rewards[3],  mec='none', ms=3, label='Q$_{ravg}$-SSPR $\\alpha_0=0.25$')
 
-    ax.plot(S_rewards[0],  mec='none', ms=3, label='SARSA$_{ravg}$-SSPR $\\alpha_0=0.01$')
-    ax.plot(S_rewards[1],  mec='none', ms=3, label='SARSA$_{ravg}$-SSPR $\\alpha_0=0.05$')
-    ax.plot(S_rewards[2],  mec='none', ms=3, label='SARSA$_{ravg}$-SSPR $\\alpha_0=0.15$')
-    ax.plot(S_rewards[3],  mec='none', ms=3, label='SARSA$_{ravg}$-SSPR $\\alpha_0=0.25$')
+    # ax.plot(S_rewards[0],  mec='none', ms=3, label='SARSA$_{ravg}$-SSPR $\\alpha_0=0.01$')
+    # ax.plot(S_rewards[1],  mec='none', ms=3, label='SARSA$_{ravg}$-SSPR $\\alpha_0=0.05$')
+    # ax.plot(S_rewards[2],  mec='none', ms=3, label='SARSA$_{ravg}$-SSPR $\\alpha_0=0.15$')
+    # ax.plot(S_rewards[3],  mec='none', ms=3, label='SARSA$_{ravg}$-SSPR $\\alpha_0=0.25$')
+
+    ax.plot(Q_rewards[0], c=c1, mec='none', ms=3, label='Q$_{SSP}$, $\\alpha_0=0.01$')
+    ax.plot(Q_rewards[1], c=c2, mec='none', ms=3, label='Q$_{SSP}$, $\\alpha_0=0.05$')
+    ax.plot(Q_rewards[2],  mec='none', ms=3, label='Q$_{SSP}$, $\\alpha_0=0.15$')
+    ax.plot(Q_rewards[3],  mec='none', ms=3, label='Q$_{SSP}$, $\\alpha_0=0.25$')
+
+    ax.plot(S_rewards[0],  mec='none', ms=3, label='SARSA$_{SSP}$, $\\alpha_0=0.01$')
+    ax.plot(S_rewards[1],  mec='none', ms=3, label='SARSA$_{SSP}$, $\\alpha_0=0.05$')
+    ax.plot(S_rewards[2],  mec='none', ms=3, label='SARSA$_{SSP}$, $\\alpha_0=0.15$')
+    ax.plot(S_rewards[3],  mec='none', ms=3, label='SARSA$_{SSP}$, $\\alpha_0=0.25$')
 
     ax.set_xlabel('number of learning episodes', fontsize=14)
     ax.set_ylabel('rewards', fontsize=14)
@@ -120,43 +130,46 @@ def plot_accuracy():
     d3_0005 = LA_data5['opt3'][0]
     d4_0005 = LA_data5['opt4'][0]
 
-    Q_g2_005 = plotting.load_csv_data(file_Q_g2_005, 'accuracy').values
-    S_g2_005 = plotting.load_csv_data(file_S_g2_005, 'accuracy').values
-    Q_g2_025 = plotting.load_csv_data(file_Q_g2_025, 'accuracy').values
-    S_g2_025 = plotting.load_csv_data(file_S_g2_025, 'accuracy').values
+    Q_g2_005 = utils.load_csv_data(file_Q_g2_005, 'accuracy').values
+    S_g2_005 = utils.load_csv_data(file_S_g2_005, 'accuracy').values
+    Q_g2_025 = utils.load_csv_data(file_Q_g2_025, 'accuracy').values
+    S_g2_025 = utils.load_csv_data(file_S_g2_025, 'accuracy').values
 
-    fig, ax = plt.subplots(figsize=(14, 5))
+    fig, ax = plt.subplots(figsize=(10, 6))
     ax.grid(True)
   
     if figure == 1:
-        ax.plot(d1_0001, mec='none', ms=3, label='Algo1 $\\lambda=0.001$')
-        ax.plot(d2_0001, mec='none', ms=3, label='Algo2 $\\lambda=0.001$')
-        ax.plot(d3_0001, mec='none', ms=3, label='Algo3 $\\lambda=0.001$')
-        ax.plot(d4_0001, mec='none', ms=3, label='Algo4 $\\lambda=0.001$')
+        # ax.plot(d1_0001, mec='none', ms=3, label='Algo1 $\\lambda=0.001$')
+        # ax.plot(d2_0001, mec='none', ms=3, label='Algo2 $\\lambda=0.001$')
+        # ax.plot(d3_0001, mec='none', ms=3, label='Algo3 $\\lambda=0.001$')
+        # ax.plot(d4_0001, mec='none', ms=3, label='Algo4 $\\lambda=0.001$')
         #
         Q_g2_005 = signal.medfilt(Q_g2_005, 21)
         S_g2_005 = signal.medfilt(S_g2_005, 21)
         
-        ax.plot(S_g2_005, color='red', mec='none', ms=3, label='SARSA$_{ravg}$-SSPR $\\alpha=0.05$')
-        ax.plot(Q_g2_005, color='blue', mec='none', ms=3, label='Q$_{ravg}$-SSPR $\\alpha=0.05$')
+        ax.plot(S_g2_005, color='red', mec='none', ms=3, label='SARSA$_{SSP}$ $\\alpha=0.05$')
+        ax.plot(Q_g2_005, color='blue', mec='none', ms=3, label='Q$_{SSP}$ $\\alpha=0.05$')
         
     else:
-        ax.plot(d1_0005, mec='none', ms=3, label='Algo1 $\\lambda=0.005$')
-        ax.plot(d2_0005, mec='none', ms=3, label='Algo2 $\\lambda=0.005$')
-        ax.plot(d3_0005, mec='none', ms=3, label='Algo3 $\\lambda=0.005$')
-        ax.plot(d4_0005, mec='none', ms=3, label='Algo4 $\\lambda=0.005$')
+        # ax.plot(d1_0005, mec='none', ms=3, label='Algo1 $\\lambda=0.005$')
+        # ax.plot(d2_0005, mec='none', ms=3, label='Algo2 $\\lambda=0.005$')
+        # ax.plot(d3_0005, mec='none', ms=3, label='Algo3 $\\lambda=0.005$')
+        # ax.plot(d4_0005, mec='none', ms=3, label='Algo4 $\\lambda=0.005$')
 
         Q_g2_025 = signal.medfilt(Q_g2_025, 21)
         S_g2_025 = signal.medfilt(S_g2_025, 21)
 
-        ax.plot(S_g2_025, color='red', mec='none', ms=3, label='SARSA$_{ravg}$-SSPR $\\alpha=0.25$')
-        ax.plot(Q_g2_025, color='blue',  mec='none', ms=3, label='Q$_{ravg}$-SSPR $\\alpha=0.25$')
+        ax.plot(S_g2_025, color='red', mec='none', ms=3, label='SARSA$_{SSP}$ $\\alpha=0.25$')
+        ax.plot(Q_g2_025, color='blue',  mec='none', ms=3, label='Q$_{SSP}$ $\\alpha=0.25$')
 
 
     ax.plot()
     ax.set_xlabel('number of learning episodes', fontsize=12)
     ax.set_ylabel('accuracy', fontsize=12)
     ax.legend()
+    my_x_ticks = np.arange(0, 30000, 2000)
+    plt.xticks(my_x_ticks)
+
     plt.show()
 
     # ax.plot(S_rewards[0],  mec='none', ms=3, label='SARSA$_{ravg}$-SSPR $\\alpha=0.01$')
@@ -210,38 +223,43 @@ def padding(file, file_padding):
     return True
     # return data
 
-def plot_data_lists(params, data_list, label_list):
+def plot_data_lists(data_list, 
+                    label_list, 
+                    length=10, 
+                    height=6, 
+                    x_label='x', 
+                    y_label='y', 
+                    label_fsize=14, 
+                    save=True, 
+                    figure_name='temp'):
     '''
-    params:控制图的信息
-    args: 应该为list1， list2， list3...等
-    把这些list画在一张图上
+    data_list: 应该为data1， data2， data3...等
+    把这些data画在一张图上
     '''
-    if params['save']:
+    import matplotlib.pyplot as plt
+    if save:
         matplotlib.use('PDF')
-    size1 = params['length']
-    size2 = params['hight']
-    xlabel = params['xlabel']
-    ylabel = params['ylabel']
-    label_fsize = params['label_fsize']
-    fig, ax = plt.subplots(figsize=(size1, size2))
+
+    fig, ax = plt.subplots(figsize=(length, height))
     ax.grid(True)
 
-    for i, list in enumerate(data_list):
-        data = data_list[0]
-        ax.plot(data, label=label_list[i]) # mec='none', ms=3, label='Algo1 $\\lambda=0.005$'
+    for data, label in zip(data_list, label_list):
+        ax.plot(data, label=label) # mec='none', ms=3, label='Algo1 $\\lambda=0.005$'
     
     ax.plot()
-    ax.set_xlabel(xlabel, fontsize=label_fsize)
-    ax.set_ylabel(ylabel, fontsize=label_fsize)
+    ax.set_xlabel(x_label, fontsize=label_fsize)
+    ax.set_ylabel(y_label, fontsize=label_fsize)
     ax.legend()
-    plt.show()
-
-    if params['save']:
-        plt.savefig(params['figurename'])
+    ax.grid(True)
+    
+    if save:
+        plt.savefig(figure_name)
+    else:
+        plt.show()
 
 def plot_regrets():
     save = True
-    graph = 2
+    graph = 1
     if save:
         matplotlib.use('PDF')
     
@@ -263,7 +281,7 @@ def plot_regrets():
     
 
     files = [Q_regret_f, SARSA_regret_f, klhhr_regret_f, cucb_regret_f, ts_regret_f]
-    labels = ['$Q_{ravg}$-SSPR $\\alpha_0=0.25$', '$SARSA_{ravg}$-SSPR $\\alpha_0=0.25$', 'KL-HHR', 'CUCB', 'Thompson Sampling']
+    labels = ['$Q_{SSP}$, $\\alpha_0=0.25$', '$SARSA_{SSP}$, $\\alpha_0=0.25$', 'KL-HHR', 'CUCB', 'Thompson Sampling']
     # load数据
     datas = []
     x = np.array([0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 2000, 3000, 4000, 5000, 6000, 7000, 8000, 9000, 10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000]) # x：需要画到图上的数据点的位置
@@ -302,6 +320,7 @@ def plot_regrets():
 if __name__ == "__main__":
     
     # plot_Q_S_rewards()
-    # plot_accuracy()
+    plot_accuracy()
     # data_padding()
-    plot_regrets()
+    # plot_regrets()
+    
